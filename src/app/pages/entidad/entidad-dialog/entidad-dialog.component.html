@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-card-title>{{ asignarTitulo() }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="formEntidad">
+        <div class="field-form">
+
+            <mat-form-field class="input-field">
+                <mat-label>Tipo de Documento</mat-label>
+                <mat-select formControlName="tipoDocumento">
+                  <mat-option
+                    *ngFor="let tipoDocumento of tipoDocuments$ | async"
+                    [value]="tipoDocumento.id_tipo_documento"
+                  >
+                    {{ tipoDocumento.id_tipo_documento }} - {{ tipoDocumento.nombre }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="validarPorCampo('tipoDocumento')">
+                    Ingresar Tipo de Documento
+                </mat-error>
+            </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Nº Documento</mat-label>
+            <input type="text" matInput formControlName="nro_documento" maxlength="25" (keyup)="validarNumeroDocumento()" />
+            <mat-error *ngIf="validarPorCampo('nro_documento')">Ingresar Nº documento</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Razon Social</mat-label>
+            <input type="text" matInput formControlName="razon_social" maxlength="100" />
+            <mat-error *ngIf="validarPorCampo('razon_social')">Ingresar razon social</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Nombre Comercial</mat-label>
+            <input type="text" matInput formControlName="nombre_comercial" maxlength="100" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Tipo de Contribuyente</mat-label>
+            <mat-select formControlName="tipoContribuyente">
+              <mat-option
+                *ngFor="let tipoContribuyente of tipoContribuyente$ | async"
+                [value]="tipoContribuyente.id_tipo_contribuyente"
+              >
+                {{ tipoContribuyente.id_tipo_contribuyente }} - {{ tipoContribuyente.nombre }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="validarPorCampo('tipoContribuyente')">
+                Ingresar Tipo de Contribuyente
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+            <mat-label>Direccion</mat-label>
+            <input type="text" matInput formControlName="direccion" maxlength="250" />
+            <mat-error *ngIf="validarPorCampo('direccion')">Ingresar Direccion</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Telefono</mat-label>
+            <input type="text" matInput formControlName="telefono" maxlength="50" />
+          </mat-form-field>
+
+            <mat-checkbox formControlName="estado">Habilitar</mat-checkbox>
+
+        </div>
+      </form>
+    </mat-card-content>
+  
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="guardarEntidad()">Guardar</button>
+      <button mat-raised-button color="warn" (click)="cerrarDialogo()">
+        Cerrar
+      </button>
+    </mat-card-actions>
+  </mat-card>

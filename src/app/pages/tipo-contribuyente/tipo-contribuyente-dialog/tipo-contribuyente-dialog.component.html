@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-title>{{ asignarTitulo() }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="formTipoContribuyente">
+        <div class="field-form">
+          <mat-form-field class="input-field">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="nombre" maxlength="50" />
+            <mat-error *ngIf="validarPorCampo('nombre')">Ingresar nombre</mat-error>
+          </mat-form-field>
+
+            <mat-checkbox formControlName="estado">Habilitar</mat-checkbox>
+
+        </div>
+      </form>
+    </mat-card-content>
+  
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="guardarTipoContribuyente()">Guardar</button>
+      <button mat-raised-button color="warn" (click)="cerrarDialogo()">
+        Cerrar
+      </button>
+    </mat-card-actions>
+  </mat-card>

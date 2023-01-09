@@ -1,0 +1,9 @@
+.field-form{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field{
+    margin-bottom: 1.8%;
+}

@@ -1,0 +1,68 @@
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu_open</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+
+    <h1 class="example-app-name">SINTADAPP</h1>
+
+    <span class="example-spacer"></span>
+
+    <span>Usuario: {{usuarioLogeado}}</span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sign off</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #sidenav style="width: 200px" mode="side">
+
+      <button
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        style="cursor: pointer"
+        routerLink="entidad"
+      >
+        <mat-icon>account_balance</mat-icon>
+        <span>Entidad</span>
+      </button>
+      <mat-divider></mat-divider>
+
+      <button
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        style="cursor: pointer"
+        routerLink="tipo-documento"
+      >
+        <mat-icon>work</mat-icon>
+        <span>Tipo Documento</span>
+      </button>
+      <mat-divider></mat-divider>
+
+      <button
+        mat-menu-item
+        (click)="sidenav.toggle()"
+        style="cursor: pointer"
+        routerLink="tipo-contribuyente"
+      >
+        <mat-icon>folder</mat-icon>
+        <span>Tipo Contribuyente</span>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

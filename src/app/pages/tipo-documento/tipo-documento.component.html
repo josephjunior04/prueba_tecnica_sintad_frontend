@@ -1,0 +1,80 @@
+<div class="principal">
+  
+    <div class="cabecera">
+      <div class="buscador">
+        <mat-form-field appearance="standard">
+          <mat-label>Filtro</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            #input
+          />
+        </mat-form-field>
+      </div>
+  
+      <div class="boton-agregar">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      
+    </div>
+    <div class="tabla">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id_tipo_documento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id_tipo_documento }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="codigo" style="width: 15%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let row">{{ row.codigo }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="nombre" style="width: 20%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="descripcion" style="width: 25%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+            <td mat-cell *matCellDef="let row">{{ row.descripcion }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado" style="width:10%">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">{{ validarEstado(row.estado) }}</td>
+          </ng-container>
+  
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions" style="width: 20%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button color="primary" (click)="openDialog(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button color="warn" (click)="deleteById(row.id_tipo_documento)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No se encuentraron resultados para "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+  
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>

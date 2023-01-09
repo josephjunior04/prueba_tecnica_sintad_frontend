@@ -1,0 +1,82 @@
+<div class="principal">
+  
+    <div class="cabecera">
+      <div class="buscador">
+        <mat-form-field appearance="standard">
+          <mat-label>Filtro</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            #input
+          />
+        </mat-form-field>
+      </div>
+  
+      <div class="boton-agregar">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      
+    </div>
+    <div class="tabla">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="id_entidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id_entidad }}</td>
+          </ng-container>
+
+  
+          <ng-container matColumnDef="nro_documento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nº Documento</th>
+            <td mat-cell *matCellDef="let row">{{ row.nro_documento }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="razon_social" style="width: 25%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Razon Social</th>
+            <td mat-cell *matCellDef="let row">{{ row.razon_social }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombre_comercial">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Comercial</th>
+            <td mat-cell *matCellDef="let row">{{ row.nombre_comercial }}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">{{ validarEstado(row.estado) }}</td>
+          </ng-container>
+  
+          <!-- Actions Column -->
+          <ng-container matColumnDef="acciones" style="width: 20%;">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-button color="primary" (click)="openDialog(row)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button color="warn" (click)="deleteById(row.id_entidad)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No se encuentraron resultados para "{{ input.value }}"
+            </td>
+          </tr>
+        </table>
+  
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page of users"
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
